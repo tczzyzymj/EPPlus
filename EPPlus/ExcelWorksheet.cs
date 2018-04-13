@@ -3931,7 +3931,6 @@ namespace OfficeOpenXml
             RowInternal currRow = GetValueInner(row, 0) as RowInternal;
             if (currRow != null)
             {
-
                 // if hidden, add hidden attribute and preserve ht/customHeight (Excel compatible)
                 if (currRow.Hidden == true)
                 {
@@ -3966,6 +3965,15 @@ namespace OfficeOpenXml
                     cache.Append(" ph=\"1\"");
                 }
             }
+            else
+            {
+                if (DefaultRowHeight > 0)
+                {
+                    cache.AppendFormat(string.Format(CultureInfo.InvariantCulture, " ht=\"{0}\"", DefaultRowHeight));
+
+                    cache.AppendFormat(" customHeight=\"1\"");
+                }
+            }
             var s = GetStyleInner(row, 0);
             if (s > 0)
             {
@@ -3981,7 +3989,6 @@ namespace OfficeOpenXml
             RowInternal currRow = GetValueInner(row, 0) as RowInternal;
             if (currRow!=null)
             {
-
                 // if hidden, add hidden attribute and preserve ht/customHeight (Excel compatible)
                 if (currRow.Hidden == true)
                 {
@@ -4014,6 +4021,15 @@ namespace OfficeOpenXml
                 if (currRow.Phonetic)
                 {
                     sw.Write(" ph=\"1\"");
+                }
+            }
+            else
+            {
+                if (DefaultRowHeight > 0)
+                {
+                    sw.Write(string.Format(CultureInfo.InvariantCulture, " ht=\"{0}\"", DefaultRowHeight));
+
+                    sw.Write(" customHeight=\"1\"");
                 }
             }
             var s = GetStyleInner(row, 0);
