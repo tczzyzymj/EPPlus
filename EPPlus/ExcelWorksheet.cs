@@ -3936,11 +3936,22 @@ namespace OfficeOpenXml
                 {
                     cache.Append(" hidden=\"1\"");
                 }
+
                 if (currRow.Height >= 0)
                 {
                     cache.AppendFormat(string.Format(CultureInfo.InvariantCulture, " ht=\"{0}\"", currRow.Height));
+
                     if (currRow.CustomHeight)
                     {
+                        cache.Append(" customHeight=\"1\"");
+                    }
+                }
+                else
+                {
+                    if (DefaultRowHeight > 0)
+                    {
+                        cache.AppendFormat(string.Format(CultureInfo.InvariantCulture, " ht=\"{0}\"", DefaultRowHeight));
+
                         cache.Append(" customHeight=\"1\"");
                     }
                 }
@@ -3971,9 +3982,10 @@ namespace OfficeOpenXml
                 {
                     cache.AppendFormat(string.Format(CultureInfo.InvariantCulture, " ht=\"{0}\"", DefaultRowHeight));
 
-                    cache.AppendFormat(" customHeight=\"1\"");
+                    cache.Append(" customHeight=\"1\"");
                 }
             }
+
             var s = GetStyleInner(row, 0);
             if (s > 0)
             {
